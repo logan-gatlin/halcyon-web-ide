@@ -111,7 +111,7 @@ let term = new Terminal();
 let fit = new FitAddon();
 term.loadAddon(fit);
 term.open(document.getElementById("console")!);
-term.writeln("Hello World");
+term.writeln("Welcome to the online Halcyon IDE");
 fit.fit();
 
 const compile_button = document.getElementById("compile-button")! as HTMLButtonElement;
