@@ -86,7 +86,7 @@ module example =
 end`;
 
 let text = sessionStorage.getItem(editor_storage_key) ?? default_code;
-let zoom = Number(sessionStorage.getItem(zoom_storage_key)) ?? 1;
+let zoom = Number(sessionStorage.getItem(zoom_storage_key) ?? "1");
 let binary: Uint8Array | null  = null;
 
 createEditor(
