@@ -1,0 +1,24 @@
+{
+  "name": "halcyon-web-ide",
+  "module": "src/index.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "bun build.ts",
+    "live": "bun build --watch src/index.html --outdir ./dist"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@types/file-saver": "^2.0.7",
+    "@xterm/addon-fit": "^0.10.0",
+    "@xterm/xterm": "^5.5.0",
+    "file-saver": "^2.0.5",
+    "lz-string": "^1.5.0",
+    "prism-code-editor": "^4.1.0"
+  }
+}
