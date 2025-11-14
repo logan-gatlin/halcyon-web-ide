@@ -17,7 +17,8 @@ import "prism-code-editor/scrollbar.css";
 import "@xterm/xterm/css/xterm.css"
 
 
-const storage_key = "editor-contents";
+const editor_storage_key = "editor-contents";
+const zoom_storage_key = "zoom-level";
 
 languageMap.halcyon = {
   comments: {
@@ -84,7 +85,8 @@ module example =
   do fizzbuzz 1 30
 end`;
 
-let text = sessionStorage.getItem(storage_key) ?? default_code;
+let text = sessionStorage.getItem(editor_storage_key) ?? default_code;
+let zoom = Number(sessionStorage.getItem(zoom_storage_key)) ?? 1;
 let binary: Uint8Array | null  = null;
 
 createEditor(
@@ -92,7 +94,7 @@ createEditor(
   {
     value: text,
     onUpdate(this, input) {
-      sessionStorage.setItem(storage_key, input);
+      sessionStorage.setItem(editor_storage_key, input);
       text = input;
       binary = null;
     },
@@ -113,6 +115,23 @@ term.loadAddon(fit);
 term.open(document.getElementById("console")!);
 term.writeln("Welcome to the online Halcyon IDE");
 fit.fit();
+
+const zoom_in_button = document.getElementById("zoom-in-button")!;
+const zoom_out_button = document.getElementById("zoom-out-button")!;
+const editor_element = document.getElementsByClassName("prism-code-editor")[0]! as HTMLElement;
+editor_element.style.setProperty("font-size", `${zoom}em`);
+
+zoom_out_button.onclick = () => {
+  zoom -= 0.1;
+  zoom = zoom <= 0 ? 0.1 : zoom;
+  editor_element.style.setProperty("font-size", `${zoom}em`);
+  sessionStorage.setItem(zoom_storage_key, String(zoom));
+};
+zoom_in_button.onclick = () => {
+  zoom += 0.1;
+  editor_element.style.setProperty("font-size", `${zoom}em`);
+  sessionStorage.setItem(zoom_storage_key, String(zoom));
+};
 
 const compile_button = document.getElementById("compile-button")! as HTMLButtonElement;
 const run_button = document.getElementById("run-button")! as HTMLButtonElement;
