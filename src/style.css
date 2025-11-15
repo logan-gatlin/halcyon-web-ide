@@ -49,7 +49,7 @@ li.push {
   top: 3em;
   left: 0;
   right: 0;
-  bottom: 10em;
+  bottom: 15em;
   overflow-y: auto;
   box-sizing: border-box;
 }
